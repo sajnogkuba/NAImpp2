@@ -1,4 +1,6 @@
 import java.io.File;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,6 +24,18 @@ public class Main {
             }
             case 2 -> {
                 Perceptron perceptron = new Perceptron(trainSet, alpha);
+                for(int i = 0; i < 100; i++){
+                    perceptron.teach();
+                }
+                Scanner scanner = new Scanner(System.in);
+                String input = "";
+                while (!input.equals("stop")) {
+                    List<String> vector = userInterface.getUserVector(perceptron.getNumberOfValuesInVector());
+                    System.out.println();
+                    System.out.println("I think it is: " + perceptron.classify(vector));
+                    System.out.println("Type in 'stop' to close program");
+                    input = scanner.nextLine();
+                }
             }
         }
 

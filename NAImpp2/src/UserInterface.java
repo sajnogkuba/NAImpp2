@@ -1,5 +1,7 @@
 import java.io.File;
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -66,5 +68,25 @@ public class UserInterface {
             System.out.println("You should type in a double, try again.");
             return chooseAlpha();
         }
+    }
+
+    public List<String> getUserVector(int numberOfValuesInVector) {
+        System.out.println("Type in vector, separate values by comma. Like this: w,x,y,z");
+        scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] arr = input.split(",");
+        if(arr.length != numberOfValuesInVector){
+            System.out.println("You should type in " + numberOfValuesInVector + " values, try again.");
+            return getUserVector(numberOfValuesInVector);
+        }
+        try{
+            for (String value : arr) {
+                Double.parseDouble(value);
+            }
+        } catch (NumberFormatException e){
+            System.out.println("Invalid values, try again.");
+            return getUserVector(numberOfValuesInVector);
+        }
+        return Arrays.stream(arr).toList();
     }
 }

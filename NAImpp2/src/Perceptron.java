@@ -48,7 +48,7 @@ public class Perceptron {
         correctAnswers.forEach((k, v) -> System.out.println(k + ": " + v / count.get(k) * 100 + "%"));
     }
 
-    private IrisType classify(List<String> vector) {
+    IrisType classify(List<String> vector) {
         double sum = 0;
         for(int i = 0; i < vector.size() - 1; i++){
             sum += Double.parseDouble(vector.get(i)) * weights.get(i);
@@ -94,7 +94,9 @@ public class Perceptron {
             weights.add(weights.getLast()+ (d - y) * alpha * -1);
             this.weights = weights;
         }
+    }
 
-
+    public int getNumberOfValuesInVector(){
+        return trainSet.getFirst().size() - 1;
     }
 }
