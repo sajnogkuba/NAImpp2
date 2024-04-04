@@ -21,7 +21,7 @@ public class UserInterface {
     }
 
     public File chooseTestSet() {
-        System.out.println("Input path to file with Train Set:");
+        System.out.println("Input path to file with Test Set:");
         return chooseFile();
     }
 

@@ -12,6 +12,11 @@ public class Main {
             case 1 -> {
                 File testSet = userInterface.chooseTestSet();
                 Perceptron perceptron = new Perceptron(trainSet, alpha, testSet);
+                for (int i = 0; i < 10000 && perceptron.checkAccuracy() < 100; i++){
+                    System.out.println(perceptron.checkAccuracy());
+                    perceptron.teach();
+                }
+                perceptron.HujDupaCyce();
             }
             case 2 -> {
                 Perceptron perceptron = new Perceptron(trainSet, alpha);
