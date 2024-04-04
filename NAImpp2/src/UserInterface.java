@@ -1,3 +1,5 @@
+import com.sun.security.jgss.GSSUtil;
+
 import java.io.File;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -54,6 +56,17 @@ public class UserInterface {
         } else {
             System.out.println("No such file, try again.");
             return chooseFile();
+        }
+    }
+
+    public double chooseAlpha() {
+        System.out.println("Choose alpha:");
+        scanner = new Scanner(System.in);
+        try{
+            return scanner.nextDouble();
+        } catch (InputMismatchException e){
+            System.out.println("You should type in a double, try again.");
+            return chooseAlpha();
         }
     }
 }

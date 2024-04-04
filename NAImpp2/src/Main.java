@@ -5,7 +5,8 @@ public class Main {
     public static void main(String[] args) {
         UserInterface userInterface = new UserInterface();
         File trainSet = userInterface.chooseTrainSet();
-        Perceptron perceptron = new Perceptron(trainSet);
+        double alpha = userInterface.chooseAlpha();
+        Perceptron perceptron = new Perceptron(trainSet, alpha);
         int programMode = userInterface.chooseMode();
 
         switch (programMode){
