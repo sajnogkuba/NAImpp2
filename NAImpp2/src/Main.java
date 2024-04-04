@@ -1,5 +1,4 @@
 import java.io.File;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,10 +12,13 @@ public class Main {
                 File testSet = userInterface.chooseTestSet();
                 Perceptron perceptron = new Perceptron(trainSet, alpha, testSet);
                 for (int i = 0; i < 10000 && perceptron.checkAccuracy() < 100; i++){
-                    System.out.println(perceptron.checkAccuracy());
+                    System.out.println("Accuracy: " + perceptron.checkAccuracy() + " %");
+                    perceptron.checkAccuracyPerType();
+                    System.out.println();
                     perceptron.teach();
                 }
-                perceptron.HujDupaCyce();
+                System.out.println("Accuracy: " + perceptron.checkAccuracy() + " %");
+                perceptron.checkAccuracyPerType();
             }
             case 2 -> {
                 Perceptron perceptron = new Perceptron(trainSet, alpha);
