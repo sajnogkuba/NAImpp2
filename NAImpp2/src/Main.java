@@ -6,14 +6,16 @@ public class Main {
         UserInterface userInterface = new UserInterface();
         File trainSet = userInterface.chooseTrainSet();
         double alpha = userInterface.chooseAlpha();
-        Perceptron perceptron = new Perceptron(trainSet, alpha);
         int programMode = userInterface.chooseMode();
 
         switch (programMode){
             case 1 -> {
                 File testSet = userInterface.chooseTestSet();
+                Perceptron perceptron = new Perceptron(trainSet, alpha, testSet);
             }
-            case 2 -> {}
+            case 2 -> {
+                Perceptron perceptron = new Perceptron(trainSet, alpha);
+            }
         }
 
     }
