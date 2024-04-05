@@ -91,7 +91,7 @@ public class Perceptron {
             for (int i = 0; i < vector.size() - 1; i++) {
                 weights.add(this.weights.get(i) + (d - y) * alpha * Double.parseDouble(vector.get(i)));
             }
-            weights.add(weights.getLast()+ (d - y) * alpha * -1);
+            weights.add(this.weights.getLast()+ (d - y) * alpha * -1);
             this.weights = weights;
         }
     }
