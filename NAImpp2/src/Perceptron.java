@@ -22,7 +22,7 @@ public class Perceptron {
     public double checkAccuracy() {
         double correctAnswers = 0;
         for (List<String> vector : testSet) {
-            if (classify(vector) == IrisType.getType(vector.getLast())){
+            if (classify(vector) == IrisType.getType(vector.get(vector.size()-1))){
                 correctAnswers++;
             }
         }
@@ -33,16 +33,16 @@ public class Perceptron {
         Map<IrisType, Double> count = new HashMap<>();
         Map<IrisType, Double> correctAnswers = new HashMap<>();
         for (List<String> vector : testSet) {
-            correctAnswers.put(IrisType.getType(vector.getLast()), 0.0);
-            if(count.containsKey(IrisType.getType(vector.getLast()))){
-                count.put(IrisType.getType(vector.getLast()), count.get(IrisType.getType(vector.getLast())) + 1);
+            correctAnswers.put(IrisType.getType(vector.get(vector.size()-1)), 0.0);
+            if(count.containsKey(IrisType.getType(vector.get(vector.size()-1)))){
+                count.put(IrisType.getType(vector.get(vector.size()-1)), count.get(IrisType.getType(vector.get(vector.size()-1))) + 1);
             } else {
-                count.put(IrisType.getType(vector.getLast()), 1.0);
+                count.put(IrisType.getType(vector.get(vector.size()-1)), 1.0);
             }
         }
         for (List<String> vector : testSet) {
-            if(classify(vector).equals(IrisType.getType(vector.getLast()))){
-                correctAnswers.put(IrisType.getType(vector.getLast()), correctAnswers.get(IrisType.getType(vector.getLast())) + 1);
+            if(classify(vector).equals(IrisType.getType(vector.get(vector.size()-1)))){
+                correctAnswers.put(IrisType.getType(vector.get(vector.size()-1)), correctAnswers.get(IrisType.getType(vector.get(vector.size()-1))) + 1);
             }
         }
         correctAnswers.forEach((k, v) -> System.out.println(k + ": " + v / count.get(k) * 100 + "%"));
@@ -53,7 +53,7 @@ public class Perceptron {
         for(int i = 0; i < vector.size() - 1; i++){
             sum += Double.parseDouble(vector.get(i)) * weights.get(i);
         }
-        if (sum > weights.getLast()){
+        if (sum > weights.get(weights.size() - 1)){
             return IrisType.Iris_setosa;
         } else {
             return IrisType.Iris_versicolor;
@@ -86,12 +86,12 @@ public class Perceptron {
     public void teach() {
         for (List<String> vector : trainSet) {
             List<Double> weights = new ArrayList<>();
-            int d = Objects.requireNonNull(IrisType.getType(vector.getLast())).toInt();
+            int d = Objects.requireNonNull(IrisType.getType(vector.get(vector.size()-1))).toInt();
             int y = classify(vector).toInt();
             for (int i = 0; i < vector.size() - 1; i++) {
                 weights.add(this.weights.get(i) + (d - y) * alpha * Double.parseDouble(vector.get(i)));
             }
-            weights.add(weights.getLast()+ (d - y) * alpha * -1);
+            weights.add(weights.get(weights.size() - 1) + (d - y) * alpha * -1);
             this.weights = weights;
         }
 
